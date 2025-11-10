@@ -1,10 +1,5 @@
-my_project/
+cocktail_project/
 ├── app/
-│   └── TestCar.py
-├── Vehicles/
-│   ├── __init__.py
-│   ├── Car.py
-│   └── ElectricCar.py
-├── pyproject.toml
-├── project_structure.py
-└── requirements.txt
+│   └── main.py
+├── config.toml
+└── project_structure.py
