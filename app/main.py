@@ -7,7 +7,9 @@ try:
     with open('pyproject.toml', 'rb') as f:
         config = tomllib.load(f)
     tests_enabled = config['settings']['tests_enabled']
+    show_coctail_tree = config['settings']['show_coctail_tree']
     print(f"Тесты включены: {tests_enabled}")
+    print(f"Вывод дерева коктейлей: {show_coctail_tree}")
 except:
     print("Ошибка загрузки config.toml, используем настройки по умолчанию")
     tests_enabled = False
@@ -36,6 +38,37 @@ def get_coctail(val):
             return key
     return "No coctail"
 
+def print_cocktail_tree():
+    """Выводит структуру коктейлей в виде дерева"""
+    print("=== СТРУКТУРА КОКТЕЙЛЕЙ ===")
+    
+    for cocktail_name, ingredients in coctails.items():
+        # Имя папки коктейля (без пробелов)
+        folder_name = cocktail_name.replace(" ", "")
+        print(f"{folder_name}/")
+        
+        # Разделяем ингредиенты
+        alcohol_ingredients = [ing for ing in ingredients if ing in alcohol_bar]
+        non_alcohol_ingredients = [ing for ing in ingredients if ing in non_alco_bar]
+        
+        # Алкогольные ингредиенты
+        print(f"  alcohol/")
+        if alcohol_ingredients:
+            alcohol_file = ", ".join(alcohol_ingredients) + ".txt"
+            print(f"    {alcohol_file}")
+        else:
+            print(f"    (empty)")
+        
+        # Безалкогольные ингредиенты
+        print(f"  nonalcohol/")
+        if non_alcohol_ingredients:
+            non_alcohol_file = ", ".join(non_alcohol_ingredients) + ".txt"
+            print(f"    {non_alcohol_file}")
+        else:
+            print(f"    (empty)")
+        
+        print()  # Пустая строка между коктейлями
+
 def run(inp_bar):
     print("Input values:", list(set(inp_bar)))
     for recepie in coctails.values():
@@ -47,6 +80,9 @@ def run(inp_bar):
                 remain = ", ".join(remain)
                 print(f"For {get_coctail(recepie)} not enough {remain}.")
     print("")
+
+if show_coctail_tree:
+    print_cocktail_tree()
 
 # Основная логика
 if tests_enabled:
