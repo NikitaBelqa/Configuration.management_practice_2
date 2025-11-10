@@ -54,7 +54,7 @@ def print_cocktail_tree():
         # Алкогольные ингредиенты
         print(f"  alcohol/")
         if alcohol_ingredients:
-            alcohol_file = ", ".join(alcohol_ingredients) + ".txt"
+            alcohol_file = ", ".join(alcohol_ingredients)
             print(f"    {alcohol_file}")
         else:
             print(f"    (empty)")
@@ -62,7 +62,7 @@ def print_cocktail_tree():
         # Безалкогольные ингредиенты
         print(f"  nonalcohol/")
         if non_alcohol_ingredients:
-            non_alcohol_file = ", ".join(non_alcohol_ingredients) + ".txt"
+            non_alcohol_file = ", ".join(non_alcohol_ingredients)
             print(f"    {non_alcohol_file}")
         else:
             print(f"    (empty)")

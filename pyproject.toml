@@ -1,3 +1,3 @@
 [settings]
 tests_enabled = false
-show_coctail_tree = false
+show_coctail_tree = true

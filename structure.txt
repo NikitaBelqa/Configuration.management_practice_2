@@ -1,5 +1,0 @@
-cocktail_project/
-├── app/
-│   └── main.py
-├── config.toml
-└── project_structure.py

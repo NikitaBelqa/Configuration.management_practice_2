@@ -1,21 +1,27 @@
 import os
 
-def show_structure():
-    print("Структура проекта:")
-    for root, dirs, files in os.walk("."):
-        # Пропускаем служебные папки
-        if '__pycache__' in dirs:
-            dirs.remove('__pycache__')
-        if '.git' in dirs:
-            dirs.remove('.git')
-        
-        level = root.count(os.sep) - 1
-        indent = ' ' * 2 * level
-        print(f"{indent}{os.path.basename(root)}/")
-        
-        for file in files:
-            if file.endswith(('.py', '.toml')):
-                print(f"{indent}  {file}")
+def simple_structure():
+    lines = ["@startmindmap", "* cocktail_project/"]
+    
+    # Добавляем все что видим в проекте
+    for item in os.listdir("."):
+        if item.startswith('.'):
+            continue
+            
+        if os.path.isdir(item):
+            lines.append(f"** {item}")
+            # Добавляем файлы внутри папки
+            for file in os.listdir(item):
+                if not file.startswith('.'):
+                    lines.append(f"*** {file}")
+        else:
+            lines.append(f"** {item}")
+    
+    lines.append("@endmindmap")
+    
+    with open("project_structure.puml", "w") as f:
+        f.write("\n".join(lines))
+    
+    print("Готово! Диаграмма создана.")
 
-if __name__ == "__main__":
-    show_structure()
+simple_structure()
